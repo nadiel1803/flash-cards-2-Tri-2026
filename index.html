@@ -1,25 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" />
-    <title>Conecta Aí</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Confere Aí</title>
 </head>
 <body>
-    <header class="cabecalho">
-        <h1>Confere Aí</h1>
-        <nav>
-            <a href="#" class="cabecalho-link">Inicio</a>
-        </nav>
+    <!-- Background animated gradient -->
+    <div class="bg-gradient"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">🔍</span>
+                <h1>Confere Aí</h1>
+            </div>
+            <nav>
+                <a href="#" class="nav-link active">Início</a>
+            </nav>
+        </div>
     </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Explore o mundo</span>
+            <h2>Descubra a verdade <span class="highlight">passando o mouse</span></h2>
+            <p>Passe o mouse sobre os cards e revele curiosidades fascinantes sobre diversos assuntos.</p>
+        </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <section class="filter-section">
+        <div class="filter-tabs" id="filterTabs"></div>
+    </section>
+
+    <!-- Curiosities Grid -->
     <main>
-        <h2>Descubra a verdade passando o mouse</h2>
-        <div id="curiosities-output"></div>
+        <div id="curiosities-output" class="grid-container"></div>
     </main>
-    <footer>
-        <p>Projeto feito por Daniel Almeida - 2°D Exatas</p>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Feito com ❤️ por <strong>Daniel Almeida</strong> — 2°D Exatas</p>
+            <span class="footer-tag">Confere Aí © 2026</span>
+        </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
