@@ -1,84 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Confere Aí</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Conecta Aí</title>
 </head>
 <body>
-    <!-- Fundo Interativo de Partículas -->
-    <canvas id="particleCanvas"></canvas>
-
-    <!-- Cabeçalho -->
-    <header class="header" id="mainHeader">
-        <div class="header-inner">
-            <div class="logo">
-                <span class="logo-icon">🔍</span>
-                <h1>Confere Aí</h1>
-            </div>
-            <nav>
-                <a href="#" class="nav-link active" data-page="home">Início</a>
-                <a href="#" class="nav-link" data-page="create">Criar Card</a>
-            </nav>
-        </div>
+    <header class="cabecalho">
+        <h1>Confere Aí</h1>
+        <nav>
+            <a href="#" class="cabecalho-link">Inicio</a>
+        </nav>
     </header>
-
-    <!-- Seção Hero -->
-    <section class="hero" id="homePage">
-        <div class="hero-content">
-            <span class="hero-badge">Explore o mundo</span>
-            <h2>Descubra a verdade <span class="highlight">passando o mouse</span></h2>
-            <p>Passe o mouse sobre os cards para revelar curiosidades fascinantes em tempo real.</p>
-        </div>
-    </section>
-
-    <!-- Criador de Cards com IA -->
-    <section class="ai-section" id="aiSection">
-        <div class="ai-container">
-            <div class="ai-glow"></div>
-            <div class="ai-header">
-                <span class="ai-icon">✨</span>
-                <h3>Criador de Cards com IA</h3>
-                <p>Digite qualquer tema para a IA gerar uma curiosidade inédita em tempo real</p>
-            </div>
-            
-            <div class="ai-api-wrapper" style="margin-bottom: 12px;">
-                <input type="password" id="aiApiKey" placeholder="Cole sua chave de API do Gemini aqui (Opcional se pré-configurada)" class="ai-key-input">
-            </div>
-
-            <div class="ai-input-wrapper">
-                <textarea id="aiPrompt" placeholder="Ex: Curiosidades sobre buracos negros, leões, café, robótica..."></textarea>
-                <button class="ai-generate-btn" id="aiGenerateBtn">
-                    <span class="btn-text">Gerar com IA</span>
-                    <span class="btn-loading hidden">Processando...</span>
-                </button>
-            </div>
-            <div class="ai-result" id="aiResult"></div>
-        </div>
-    </section>
-
-    <!-- Filtros de Categorias -->
-    <section class="filter-section">
-        <div class="filter-tabs" id="filterTabs"></div>
-    </section>
-
-    <!-- Grid de Curiosidades -->
-    <main id="mainContent">
-        <div id="curiosities-output" class="grid-container"></div>
+    <main>
+        <h2>Descubra a verdade passando o mouse</h2>
+        <div id="curiosities-output"></div>
     </main>
-
-    <!-- Rodapé -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>Feito com ❤️ por <strong>Daniel Almeida</strong> — 2°D Exatas</p>
-            <span class="footer-tag">Confere Aí © 2026</span>
-        </div>
+    <footer>
+        <p>Projeto feito por Daniel Almeida - 2°D Exatas</p>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
