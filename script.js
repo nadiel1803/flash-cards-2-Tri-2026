@@ -1,127 +1,143 @@
-// ==========================================
-// CONFIGURAÇÕES DA API DE IA
-// ==========================================
-const API_KEY = "sk-bl-WvN5eU9Nq9FOdisawFslUpEB22HovGoe0kBi2XIcoun_VLag"; 
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+document.addEventListener('DOMContentLoaded', () => {
+    const curiosities = [
+        {
+            category: 'Animais',
+            frontImage: './images/VldACuSHLWGz.jpg',
+            frontText: 'Pinguins conseguem voar como pássaros!',
+            backText: 'Pinguins não voam, mas são excelentes nadadores.'
+        },
+        {
+            category: 'Animais',
+            frontImage: './images/VldACuSHLWGz.jpg',
+            frontText: 'O recorde de voo de uma galinha é de 13 segundos.',
+            backText: 'Apesar de não serem conhecidas por voar, galinhas podem realizar voos curtos.'
+        },
+        {
+            category: 'Animais',
+            frontImage: './images/VldACuSHLWGz.jpg',
+            frontText: 'Mosquitos são os animais mais letais do mundo.',
+            backText: 'Eles transmitem doenças que causam milhões de mortes humanas anualmente.'
+        },
+        {
+            category: 'Espaço',
+            frontImage: './images/bze0WGgurstp.jpg',
+            frontText: 'Um milhão de Terras caberiam dentro do Sol.',
+            backText: 'O Sol é uma estrela de tamanho médio, mas é imenso comparado à Terra.'
+        },
+        {
+            category: 'Espaço',
+            frontImage: './images/bze0WGgurstp.jpg',
+            frontText: 'Por anos, acreditou-se que a Terra era o único planeta com água líquida.',
+            backText: 'Hoje sabemos que há evidências de água em outros corpos celestes.'
+        },
+        {
+            category: 'Corpo Humano',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'O corpo humano tem mais ossos ao nascer do que na idade adulta.',
+            backText: 'Bebês nascem com cerca de 300 ossos, que se fundem para formar 206 no adulto.'
+        },
+        {
+            category: 'Corpo Humano',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'O cérebro humano pesa cerca de 1,4 kg.',
+            backText: 'Ele consome cerca de 20% do oxigênio e calorias do corpo.'
+        },
+        {
+            category: 'História',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'A Grande Muralha da China não é visível do espaço a olho nu.',
+            backText: 'Essa é uma lenda urbana muito difundida, mas não é verdade.'
+        },
+        {
+            category: 'História',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'Cleópatra viveu mais perto da invenção do iPhone do que da construção das pirâmides.',
+            backText: 'As pirâmides foram construídas milhares de anos antes de Cleópatra.'
+        },
+        {
+            category: 'Tecnologia',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'O primeiro mouse de computador foi feito de madeira.',
+            backText: 'Criado por Douglas Engelbart em 1964, era um bloco de madeira com rodas.'
+        },
+        {
+            category: 'Tecnologia',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'A primeira webcam foi criada para monitorar uma cafeteira.',
+            backText: 'Pesquisadores da Universidade de Cambridge a usavam para ver se o café estava pronto.'
+        },
+        {
+            category: 'Natureza',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'As nuvens não são tão leves quanto parecem.',
+            backText: 'Uma nuvem cumulus média pode pesar mais de 500 toneladas.'
+        },
+        {
+            category: 'Natureza',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'O deserto do Saara já foi uma floresta tropical.',
+            backText: 'Milhares de anos atrás, o Saara era verde e cheio de vida.'
+        },
+        {
+            category: 'Comida',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'As cenouras eram originalmente roxas.',
+            backText: 'A variedade laranja foi desenvolvida na Holanda no século XVII.'
+        },
+        {
+            category: 'Comida',
+            frontImage: './images/R2pUYFIpN9HN.jpg',
+            frontText: 'O chocolate branco não é tecnicamente chocolate.',
+            backText: 'Ele não contém sólidos de cacau, apenas manteiga de cacau.'
+        }
+    ];
 
-// ==========================================
-// LOGÍSTICA DE CURIOSIDADES (SEM IMAGENS)
-// ==========================================
-const curiositiesData = [
-  {
-    icon: "🪐",
-    title: "Ano em Vênus",
-    description: "Um dia em Vênus é mais longo do que um ano inteiro no próprio planeta."
-  },
-  {
-    icon: "🧬",
-    title: "DNA Humano",
-    description: "Cerca de 60% do DNA humano é idêntico ao DNA de uma banana."
-  },
-  {
-    icon: "⚡",
-    title: "Velocidade do Raios",
-    description: "Um único raio contém energia suficiente para assar cerca de 100.000 fatias de pão."
-  },
-  {
-    icon: "🌊",
-    title: "Oceano Desconhecido",
-    description: "Conhecemos mais a superfície da Lua e de Marte do que os oceanos da Terra."
-  }
-];
+    const curiositiesOutput = document.getElementById('curiosities-output');
 
-// Renderização dinâmica das curiosidades no DOM
-function renderCuriosities() {
-  const container = document.getElementById("curiosities-grid");
-  container.innerHTML = "";
+    const renderCuriosities = () => {
+        curiositiesOutput.innerHTML = ''; // Limpa o conteúdo existente
 
-  curiositiesData.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "curiosity-card";
-    card.innerHTML = `
-      <div class="card-icon">${item.icon}</div>
-      <h3>${item.title}</h3>
-      <p>${item.description}</p>
-    `;
-    container.appendChild(card);
-  });
-}
+        const categories = {};
+        curiosities.forEach(curiosity => {
+            if (!categories[curiosity.category]) {
+                categories[curiosity.category] = [];
+            }
+            categories[curiosity.category].push(curiosity);
+        });
 
-// ==========================================
-// GERADOR DE CARDS VIA IA EM TEMPO REAL
-// ==========================================
-async function generateAICard() {
-  const promptInput = document.getElementById("ai-prompt");
-  const userText = promptInput.value.trim();
-  const loadingElement = document.getElementById("loading");
+        for (const categoryName in categories) {
+            const categorySection = document.createElement('section');
+            categorySection.classList.add('categoria-section');
 
-  if (!userText) {
-    alert("Por favor, digite um assunto para a IA!");
-    return;
-  }
+            const categoryTitle = document.createElement('h3');
+            categoryTitle.classList.add('categoria-titulo');
+            categoryTitle.textContent = categoryName;
+            categorySection.appendChild(categoryTitle);
 
-  // Ativa o estado de carregamento
-  loadingElement.classList.remove("hidden");
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('categoria-container');
 
-  try {
-    // Chamada em tempo real para a API
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: `Gere um mini card sobre o tema "${userText}". Escolha 1 emoji adequado ao tema para usar como ícone. Responda ESTRITAMENTE no seguinte formato JSON sem formatação markdown: {"emoji": "seu_emoji", "titulo": "Um título curto", "conteudo": "Uma explicação concisa de 2 a 3 frases."}`
-          }]
-        }]
-      })
-    });
+            categories[categoryName].forEach(curiosity => {
+                const card = document.createElement('article');
+                card.classList.add('cartao');
+                card.innerHTML = `
+                    <div class="cartao-interno">
+                        <div class="cartao-frente">
+                            <img src="${curiosity.frontImage}" alt="${curiosity.category}" class="cartao-imagem">
+                            <p>${curiosity.frontText}</p>
+                        </div>
+                        <div class="cartao-verso">
+                            <img src="${curiosity.frontImage}" alt="${curiosity.category}" class="cartao-imagem">
+                            <p>${curiosity.backText}</p>
+                        </div>
+                    </div>
+                `;
+                categoryContainer.appendChild(card);
+            });
+            categorySection.appendChild(categoryContainer);
+            curiositiesOutput.appendChild(categorySection);
+        }
+    };
 
-    if (!response.ok) {
-      throw new Error("Erro de comunicação com a IA.");
-    }
-
-    const data = await response.json();
-    const rawText = data.candidates[0].content.parts[0].text;
-    
-    // Tratamento e Parse da resposta em tempo real
-    const cleanJSON = rawText.replace(/```json|```/g, "").trim();
-    const cardData = JSON.parse(cleanJSON);
-
-    // Criação do elemento visual do novo Card
-    createAICardElement(cardData.emoji, cardData.titulo, cardData.conteudo);
-
-    // Limpa o campo de entrada
-    promptInput.value = "";
-
-  } catch (error) {
-    console.error("Falha na geração:", error);
-    alert("Erro ao gerar o card em tempo real. Verifique se a chave de API é válida para este endpoint.");
-  } finally {
-    loadingElement.classList.add("hidden");
-  }
-}
-
-// Constrói o card recebido no DOM
-function createAICardElement(emoji, title, text) {
-  const container = document.getElementById("cards-container");
-  
-  const card = document.createElement("div");
-  card.className = "ai-card";
-  card.innerHTML = `
-    <div class="card-icon">${emoji || '🧠'}</div>
-    <h3>${title}</h3>
-    <p>${text}</p>
-    <span class="card-tag">✨ Gerado por IA</span>
-  `;
-
-  // Insere o novo card no topo da lista
-  container.prepend(card);
-}
-
-// Inicializa o site
-document.addEventListener("DOMContentLoaded", () => {
-  renderCuriosities();
+    renderCuriosities();
 });
