@@ -10,28 +10,97 @@
     <title>Confere Aí</title>
 </head>
 <body>
-    <!-- Background animated gradient -->
-    <div class="bg-gradient"></div>
+    <!-- Particle Canvas Background -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Auth Modal -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-modal">
+            <div class="auth-modal-header">
+                <span class="auth-logo">🔍</span>
+                <h2>Confere Aí</h2>
+            </div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Entrar</button>
+                <button class="auth-tab" data-tab="register">Criar Conta</button>
+            </div>
+            <!-- Login Form -->
+            <form class="auth-form" id="loginForm">
+                <div class="input-group">
+                    <label>E-mail</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Senha</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="auth-btn primary">Entrar</button>
+                <p class="auth-error" id="loginError"></p>
+            </form>
+            <!-- Register Form -->
+            <form class="auth-form hidden" id="registerForm">
+                <div class="input-group">
+                    <label>Nome</label>
+                    <input type="text" id="registerName" placeholder="Seu nome" required>
+                </div>
+                <div class="input-group">
+                    <label>E-mail</label>
+                    <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Senha</label>
+                    <input type="password" id="registerPassword" placeholder="Mínimo 6 caracteres" required minlength="6">
+                </div>
+                <button type="submit" class="auth-btn primary">Criar Conta</button>
+                <p class="auth-error" id="registerError"></p>
+            </form>
+        </div>
+    </div>
 
     <!-- Header -->
-    <header class="header">
+    <header class="header" id="mainHeader">
         <div class="header-inner">
             <div class="logo">
                 <span class="logo-icon">🔍</span>
                 <h1>Confere Aí</h1>
             </div>
             <nav>
-                <a href="#" class="nav-link active">Início</a>
+                <a href="#" class="nav-link active" data-page="home">Início</a>
+                <a href="#" class="nav-link" data-page="create">Criar Card</a>
             </nav>
+            <div class="header-user">
+                <span class="user-greeting" id="userGreeting">Olá, <strong></strong></span>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="homePage">
         <div class="hero-content">
             <span class="hero-badge">Explore o mundo</span>
             <h2>Descubra a verdade <span class="highlight">passando o mouse</span></h2>
             <p>Passe o mouse sobre os cards e revele curiosidades fascinantes sobre diversos assuntos.</p>
+        </div>
+    </section>
+
+    <!-- AI Card Creator Section -->
+    <section class="ai-section" id="aiSection">
+        <div class="ai-container">
+            <div class="ai-glow"></div>
+            <div class="ai-header">
+                <span class="ai-icon">✨</span>
+                <h3>Criador de Cards com IA</h3>
+                <p>Descreva o tema do card e a inteligência artificial irá gerar uma curiosidade para você</p>
+            </div>
+            <div class="ai-input-wrapper">
+                <textarea id="aiPrompt" placeholder="Ex: Curiosidade sobre dinossauros, espaço, animais marinhos..."></textarea>
+                <button class="ai-generate-btn" id="aiGenerateBtn">
+                    <span class="btn-text">Gerar com IA</span>
+                    <span class="btn-loading hidden">Gerando...</span>
+                </button>
+            </div>
+            <div class="ai-result" id="aiResult"></div>
         </div>
     </section>
 
@@ -41,7 +110,7 @@
     </section>
 
     <!-- Curiosities Grid -->
-    <main>
+    <main id="mainContent">
         <div id="curiosities-output" class="grid-container"></div>
     </main>
 
